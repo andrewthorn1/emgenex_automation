@@ -13,7 +13,8 @@ class HomepageNav(SeleniumBase):
         super().__init__(driver)
         self.driver = driver
         self.__nav_links: str = '.headermenuList>li'
-        self.NAV_LINK_TEXT = ''
+        self.__first_big_banner_locator: str = '//img[@alt="BannerRightBg2"]'
+        self.NAV_LINK_TEXT = 'Home,Solutions,About Us,Contact Us'
 
     def get_nav_links(self) -> List[WebElement]:
         return self.are_visible('css', self.__nav_links, 'Header Navigation Links')
@@ -22,3 +23,6 @@ class HomepageNav(SeleniumBase):
         nav_links = self.get_nav_links()
         nav_links_text = self.get_text_from_webelements(nav_links)
         return Utils.join_strings(nav_links_text)
+
+    def get_first_big_right_banner(self) -> WebElement:
+        return self.is_visible('xpath', self.__first_big_banner_locator, 'First big right banner')
