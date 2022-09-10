@@ -14,6 +14,7 @@ class HomepageNav(SeleniumBase):
         super().__init__(driver)
         self.driver = driver
         self.__nav_links: str = '.headermenuList>li'
+        self.__contact_us_link_locator: str = '//a[contains(text(),"Contact Us")]'
         self.__first_big_banner_locator: str = '//img[@alt="BannerRightBg2"]'
         self.__long_term_care_section_locator: str = '//div[@class="EwThreeCol w33 mw100 ib vt"][2]'
         self.__button_learn_more_in_long_term_care_section_locator: str = '//div[@class="EwThreeColInner"]//a[@href=' \
@@ -39,3 +40,6 @@ class HomepageNav(SeleniumBase):
         return self.is_present('xpath', self.__button_learn_more_in_long_term_care_section_locator, 'Button learn more'
                                                                                                     ' in long term care'
                                                                                                     ' section')
+
+    def get_contact_us_link(self) -> WebElement:
+        return self.is_visible('xpath', self.__contact_us_link_locator)
