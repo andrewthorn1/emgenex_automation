@@ -1,8 +1,6 @@
 import time
-
 import pytest
 from pom.homepage_nav import HomepageNav
-from pom.longtermcare_nav import LongTermCareNav
 
 
 @pytest.mark.usefixtures('setup')
@@ -19,7 +17,6 @@ class TestGetStartForm:
         homepage_nav.get_submit_button().click()
         actual_message_text = homepage_nav.get_submitted_message_text()
         assert actual_message_text == "Thanks for submitting the form.", "Problems with Get Started form"
-        # time.sleep(100000)
 
     @pytest.mark.regression
     def test_with_all_required_fields(self):
