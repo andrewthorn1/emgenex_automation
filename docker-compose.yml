@@ -1,0 +1,37 @@
+version: '3.8'
+services:
+  browser:
+    image: selenium/standalone-chrome-debug:3.141.59
+    restart: always
+#    image: selenium/standalone-firefox:3.141.59
+    volumes:
+      - /dev/shm:/dev/shm
+    networks:
+      - net
+    ports:
+      - "5900:5900"
+      - "4444:4444" #for webdriver access
+
+  runner:
+    restart: always
+    networks:
+      - net
+    build: .
+    shm_size: '2gb'
+    environment:
+      - SELENIUM_HOST=browser
+      - SELENIUM_PORT=4444
+      - TEST_APP_HOST=web
+      - TEST_PORT=3001
+      - TEST_ENVIRONMENT=docker
+    command: bash
+    volumes:
+      - .:/app
+      - /dev/shm:/dev/shm
+    depends_on:
+      - browser
+
+networks:
+  net:
+
+
